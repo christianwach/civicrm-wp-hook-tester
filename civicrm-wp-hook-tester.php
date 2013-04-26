@@ -184,4 +184,4 @@ class TestingCiviCrmWordPressHooks {
 } // class ends
 
 // uncomment to instantiate plugin class above
-$testing_civicrm_wordpress_hooks = new TestingCiviCrmWordPressHooks;
+//$testing_civicrm_wordpress_hooks = new TestingCiviCrmWordPressHooks;
