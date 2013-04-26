@@ -34,67 +34,67 @@
  */
 class CRM_Utils_Hook_WordPress extends CRM_Utils_Hook {
 
-  function invoke(
-    $numParams,
-    &$arg1, &$arg2, &$arg3, &$arg4, &$arg5,
-    $fnSuffix
-  ) {
-    
-    // only pass the arguments that have values
-    $args = array_slice( 
-    	array( &$arg1, &$arg2, &$arg3, &$arg4, &$arg5 ), 
-    	0, 
-    	$numParams
-    );
-    
-    // use WordPress API to run hooks
-    // uncomment in the real world and delete everything below
-    //return apply_filters_ref_array( $fnSuffix, $args );
-    
-    // to test return values
-    $return = apply_filters_ref_array( $fnSuffix, $args );
-    
-    /*
-    // testing 'hook_civicrm_pre', for example
-    if ( $fnSuffix == 'civicrm_pre' ) {
-    
-	    // trace stuff
-		print_r( "\n\n" );
-		print_r( 'invoke-post-apply_filters_ref_array' ); 
+	function invoke(
+		$numParams,
+		&$arg1, &$arg2, &$arg3, &$arg4, &$arg5,
+		$fnSuffix
+	) {
 
-		print_r( "\n\n" );
-		print_r( 'returned value'."\n" ); 
-		print_r( $return ); 
+		// only pass the arguments that have values
+		$args = array_slice( 
+			array( &$arg1, &$arg2, &$arg3, &$arg4, &$arg5 ), 
+			0, 
+			$numParams
+		);
 
-		print_r( "\n\n" );
-		print_r( 'arg1'."\n" ); 
-		print_r( $arg1 ); 
+		// use WordPress API to run hooks
+		// uncomment in the real world and delete everything below
+		//return apply_filters_ref_array( $fnSuffix, $args );
 
-		print_r( "\n\n" );
-		print_r( 'arg2'."\n" ); 
-		print_r( $arg2 ); 
+		// to test return values
+		$return = apply_filters_ref_array( $fnSuffix, $args );
 
-		print_r( "\n\n" );
-		print_r( 'arg3'."\n" ); 
-		print_r( $arg3 ); 
+		/*
+		// testing 'hook_civicrm_pre', for example
+		if ( $fnSuffix == 'civicrm_pre' ) {
 
-		print_r( "\n\n" );
-		print_r( 'arg4'."\n" ); 
-		print_r( $arg4 ); 
+			// trace stuff
+			print_r( "\n\n" );
+			print_r( 'invoke-post-apply_filters_ref_array' ); 
 
-		print_r( "\n\n" );
-		print_r( 'arg5'."\n" ); 
-		print_r( $arg5 ); 
+			print_r( "\n\n" );
+			print_r( 'returned value'."\n" ); 
+			print_r( $return ); 
 
-		die();
+			print_r( "\n\n" );
+			print_r( 'arg1'."\n" ); 
+			print_r( $arg1 ); 
+
+			print_r( "\n\n" );
+			print_r( 'arg2'."\n" ); 
+			print_r( $arg2 ); 
+
+			print_r( "\n\n" );
+			print_r( 'arg3'."\n" ); 
+			print_r( $arg3 ); 
+
+			print_r( "\n\n" );
+			print_r( 'arg4'."\n" ); 
+			print_r( $arg4 ); 
+
+			print_r( "\n\n" );
+			print_r( 'arg5'."\n" ); 
+			print_r( $arg5 ); 
+
+			die();
+
+		}
+		*/
+
+		// --<
+		return $return;
 
 	}
-	*/
-	
-	// --<
-	return $return;
-	
-  }
 
 }
 
