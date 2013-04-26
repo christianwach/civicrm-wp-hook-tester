@@ -40,14 +40,8 @@ class CRM_Utils_Hook_WordPress extends CRM_Utils_Hook {
 		$fnSuffix
 	) {
 
-		// only pass the arguments that have values
-		$args = array_slice( 
-			array( &$arg1, &$arg2, &$arg3, &$arg4, &$arg5 ), 
-			0, 
-			$numParams
-		);
-		
-		// legacy support test for existing commonInvoke hooks
+		// legacy support test for existing commonInvoke hooks, which are always
+		// prefixed by 'wordpress_'
 		$fnName = "wordpress_{$fnSuffix}";
 		if (function_exists($fnName)) {
 			return $this->commonInvoke(
@@ -57,6 +51,13 @@ class CRM_Utils_Hook_WordPress extends CRM_Utils_Hook {
 			);
 		}		
 
+		// only pass the arguments that have values
+		$args = array_slice( 
+			array( &$arg1, &$arg2, &$arg3, &$arg4, &$arg5 ), 
+			0, 
+			$numParams
+		);
+		
 		// use WordPress API to run hooks
 		// uncomment in the real world and delete everything below
 		//return apply_filters_ref_array( $fnSuffix, $args );
