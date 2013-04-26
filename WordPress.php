@@ -46,6 +46,16 @@ class CRM_Utils_Hook_WordPress extends CRM_Utils_Hook {
 			0, 
 			$numParams
 		);
+		
+		// legacy support test for existing commonInvoke hooks
+		$fnName = "wordpress_{$fnSuffix}";
+		if (function_exists($fnName)) {
+			return $this->commonInvoke(
+				$numParams,
+				$arg1, $arg2, $arg3, $arg4, $arg5,
+				$fnSuffix, 'wordpress'
+			);
+		}		
 
 		// use WordPress API to run hooks
 		// uncomment in the real world and delete everything below
