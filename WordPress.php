@@ -57,7 +57,7 @@ class CRM_Utils_Hook_WordPress extends CRM_Utils_Hook {
   /**
    * @var array(string)
    */
-  private $excludedHooks = array(
+  private $hooksThatReturn = array(
     'civicrm_upgrade',
     'civicrm_validate',
     'civicrm_validateForm',
@@ -72,9 +72,9 @@ class CRM_Utils_Hook_WordPress extends CRM_Utils_Hook {
    * CMW: because hooks are called by referencing the class (and the methods are not
    * abstract) no overloading can be done in CRM_Utils_Hook_WordPress. As a result,
    * only the invoke() method is ever available as a way to intercept and adapt
-   * hook implementations. That's (sort of) okay, because the hook name is always
-   * passed, so we can route different kind of hooks to different private methods
-   * for processing if needed
+   * hook implementations. That's okay, because the hook name is always passed, 
+   * so we can route different kind of hooks to different private methods for 
+   * processing if need be.
    */
 
   public function invoke(
@@ -82,15 +82,6 @@ class CRM_Utils_Hook_WordPress extends CRM_Utils_Hook {
     &$arg1, &$arg2, &$arg3, &$arg4, &$arg5,
     $fnSuffix
   ) {
-    
-    // only pass the arguments that have values
-    $args = array_slice( 
-      array( &$arg1, &$arg2, &$arg3, &$arg4, &$arg5 ), 
-      0, 
-      $numParams
-    );
-    
-    
     
     /**
      * CMW: do_action_ref_array is the default way of calling WordPress hooks 
@@ -129,14 +120,21 @@ class CRM_Utils_Hook_WordPress extends CRM_Utils_Hook {
      */
     
     // distinguish between types of hook
-    if ( ! in_array( $fnSuffix, $this->excludedHooks ) ) {
+    if ( ! in_array( $fnSuffix, $this->hooksThatReturn ) ) {
       
-        // ---------------------------------------------------------------------
-        // use WordPress Plugins API to modify $args
-        // ---------------------------------------------------------------------
-        // Because $args are passed as references to the WordPress callbacks, 
-        // runHooks subsequently receives appropriately modified parameters.
-        do_action_ref_array( $fnSuffix, $args );
+      // only pass the arguments that have values
+      $args = array_slice( 
+        array( &$arg1, &$arg2, &$arg3, &$arg4, &$arg5 ), 
+        0, 
+        $numParams
+      );
+    
+      // ---------------------------------------------------------------------
+      // use WordPress Plugins API to modify $args
+      // ---------------------------------------------------------------------
+      // Because $args are passed as references to the WordPress callbacks, 
+      // runHooks subsequently receives appropriately modified parameters.
+      do_action_ref_array( $fnSuffix, $args );
         
     }
     
@@ -207,6 +205,7 @@ class CRM_Utils_Hook_WordPress extends CRM_Utils_Hook {
         // a plugin simply needs to declare its "unique_plugin_code" thus:
         // add_filter('civicrm_wp_plugin_codes', 'function_that_returns_my_unique_plugin_code');
         $this->wordpressModules = apply_filters('civicrm_wp_plugin_codes', $this->wordpressModules);
+        
       }
 
       if ($this->civiModules === NULL) {
