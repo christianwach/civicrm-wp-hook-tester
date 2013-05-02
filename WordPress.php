@@ -129,23 +129,26 @@ class CRM_Utils_Hook_WordPress extends CRM_Utils_Hook {
         $numParams
       );
     
-      // ---------------------------------------------------------------------
-      // use WordPress Plugins API to modify $args
-      // ---------------------------------------------------------------------
-      // Because $args are passed as references to the WordPress callbacks, 
-      // runHooks subsequently receives appropriately modified parameters.
+      /*
+      --------------------------------------------------------------------------
+      Use WordPress Plugins API to modify $args
+      --------------------------------------------------------------------------
+      Because $args are passed as references to the WordPress callbacks, 
+      runHooks subsequently receives appropriately modified parameters.
+      */
       do_action_ref_array( $fnSuffix, $args );
         
     }
     
     
     
-    /*
+    /**
      * CMW: I'm following the logic of the Joomla hook file by allowing WordPress 
-     * callbacks to do their stuff before runHooks gets called. I'm following the
-     * logic of the Drupal hook file by building the "module" (read "plugin") list
-     * and then calling runHooks directly. This should side-step the need for the
-     * post-processing that the Joomla hook file does.
+     * callbacks to do their stuff before runHooks gets called.
+     * 
+     * I'm following the logic of the Drupal hook file by building the "module" 
+     * (read "plugin") list and then calling runHooks directly. This should avoid
+     * the need for the post-processing that the Joomla hook file does.
      * 
      * Note that hooks which require a return value are incompatible with the 
      * signature of apply_filters_ref_array and must therefore be called in 
@@ -201,9 +204,11 @@ class CRM_Utils_Hook_WordPress extends CRM_Utils_Hook {
         // initialise with the pre-existing 'wordpress' prefix
         $this->wordpressModules = array('wordpress');
         
-        // use WordPress Plugin API to build list
-        // a plugin simply needs to declare its "unique_plugin_code" thus:
-        // add_filter('civicrm_wp_plugin_codes', 'function_that_returns_my_unique_plugin_code');
+        /**
+         * Use WordPress Plugin API to build list
+         * a plugin simply needs to declare its "unique_plugin_code" thus:
+         * add_filter('civicrm_wp_plugin_codes', 'function_that_returns_my_unique_plugin_code');
+         */
         $this->wordpressModules = apply_filters('civicrm_wp_plugin_codes', $this->wordpressModules);
         
       }
