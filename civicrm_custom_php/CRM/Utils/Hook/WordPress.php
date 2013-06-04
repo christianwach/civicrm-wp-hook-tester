@@ -173,6 +173,8 @@ class CRM_Utils_Hook_WordPress extends CRM_Utils_Hook {
       $numParams, 
       $arg1, $arg2, $arg3, $arg4, $arg5
     );
+    
+    //print_r( $moduleResult ): die();
 
     // finally, return
     return empty($moduleResult) ? TRUE : $moduleResult;
