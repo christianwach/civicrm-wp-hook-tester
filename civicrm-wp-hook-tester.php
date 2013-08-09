@@ -98,6 +98,12 @@ class CiviCRM_WordPress_Hook_Tester {
 		// for certain hooks. Given that CiviCRM requires PHP5.3, you could return this
 		// with an anonymous function, but I've resisted for clarity.
 		add_filter( 'civicrm_wp_plugin_codes', array( $this, 'register_my_civicrm_plugin_code' ) );
+		
+		// to demonstrate that multiple plugins can do this, let's add another code
+		// in reality, you'd only do this once in a plugin, but this shows that multiple
+		// codes can be registered and receive callbacks. See the global scope functions
+		// at the foot of this file.
+		add_filter( 'civicrm_wp_plugin_codes', array( $this, 'register_my_civicrm_plugin_code2' ) );
 
 		// add class method to hook
 		add_action( 'civicrm_config', array( $this, 'my_civi_config_callback' ), 10, 1 );
@@ -109,7 +115,7 @@ class CiviCRM_WordPress_Hook_Tester {
 		
 		// add class method to hook
 		add_action( 'civicrm_tabs', array( $this, 'my_civi_tabs_callback' ), 10, 2 );
-		//add_action( 'civicrm_pre', array( $this, 'my_civi_pre_callback2' ), 11, 4 );
+		add_action( 'civicrm_tabs', array( $this, 'my_civi_tabs_callback2' ), 11, 4 );
 		
 		// --<
 		return $this;
@@ -126,6 +132,20 @@ class CiviCRM_WordPress_Hook_Tester {
 	
 		// add our unique code and send back to CiviCRM
 		$plugin_codes[] = 'my_unique_civicrm_plugin_code';
+		return $plugin_codes;
+		
+	}
+
+
+
+	/** 
+	 * @description: class method as callback for 'civicrm_wp_plugin_codes'
+	 * @return array
+	 */
+	function register_my_civicrm_plugin_code2( $plugin_codes ) {
+	
+		// add our unique code and send back to CiviCRM
+		$plugin_codes[] = 'my_unique_civicrm_plugin_code2';
 		return $plugin_codes;
 		
 	}
@@ -231,12 +251,56 @@ class CiviCRM_WordPress_Hook_Tester {
 		// let's add a new "contribution" tab with a different name and put it last
 		// this is just a demo, in the real world, you would create a url which would
 		// return an html snippet etc.
-		$url = CRM_Utils_System::url( 'civicrm/contact/view/contribution',
-									  "reset=1&snippet=1&force=1&cid=$contactID" );
-		$tabs[] = array( 'id'    => 'mySupercoolTab',
-						 'url'   => $url,
-						 'title' => 'Contribution Tab Renamed',
-						 'weight' => 300 );
+		$url = CRM_Utils_System::url( 
+			'civicrm/contact/view/contribution',
+			"reset=1&snippet=1&force=1&cid=$contactID"
+		);
+		
+		$tabs[] = array( 
+			'id'    => 'mySupercoolTab',
+			'url'   => $url,
+			'title' => 'Contribution Tab Renamed',
+			'weight' => 300
+		);
+
+		/*
+		// trace
+		print_r( "\n\n" );
+		print_r( 'CiviCRM_WordPress_Hook_Tester my_civi_tabs_callback'."\n" ); 
+		print_r( array( 'tabs' => $tabs, 'contactID' => $contactID ) ); 
+		die();
+		*/
+		
+	}
+
+
+
+	/** 
+	 * @description: class method as callback for 'hook_civicrm_tabs'
+	 * @return object
+	 */
+	function my_civi_tabs_callback2( &$tabs, $contactID ) {
+	
+		// example taken from the CiviCRM docs for this hook:
+		// http://wiki.civicrm.org/confluence/display/CRMDOC43/hook_civicrm_tabs
+ 
+		// unset the Memberships tab, i.e. remove it from the page
+		unset( $tabs[2] );
+ 
+		// let's add a new "summary" tab with a different name and put it last
+		// this is just a demo, in the real world, you would create a url which would
+		// return an html snippet etc.
+		$url = CRM_Utils_System::url( 
+			'civicrm/contact/view/membership',
+			"reset=1&snippet=1&force=1&cid=$contactID"
+		);
+		
+		$tabs[] = array( 
+			'id'    => 'mySupercoolTab2',
+			'url'   => $url,
+			'title' => 'Memberships Tab Renamed',
+			'weight' => 300
+		);
 
 		/*
 		// trace
@@ -301,6 +365,67 @@ function my_unique_civicrm_plugin_code_civicrm_links( $op, $objectName, $objectI
 						'url' => '/'. $objectId,
 						'weight' => 1,
 						'ref'    => 'my-module-link' // this is unique identifier for this link
+					);
+					break;
+				
+				// I think this is a Drupal block
+				case 'create.new.shortcuts':
+					// add link to create new profile
+					$links[] = array( 
+						'url'   => '/civicrm/admin/uf/group?action=add&reset=1',
+						'title' => ts('New Profile'),
+						'ref'   => 'new-profile'
+					);
+					break;
+					
+			}
+
+	}
+	
+	
+	// return our links
+	return $my_links;
+	
+}
+
+
+
+/** 
+ * @description: global function as callback for 'hook_civicrm_links'
+ * @return object
+ */
+function my_unique_civicrm_plugin_code2_civicrm_links( $op, $objectName, $objectId, &$links ) {
+
+	// example taken from the CiviCRM docs for this hook:
+	// http://wiki.civicrm.org/confluence/display/CRMDOC43/hook_civicrm_links
+
+	/*
+	// trace
+	print_r( "\n\n" );
+	print_r( 'my_unique_civicrm_plugin_code_civicrm_links'."\n" ); 
+	print_r( array( 'op' => $op, 'objectName' => $objectName, 'objectId' => $objectId, 'links' => $links ) ); 
+	//die();
+	*/
+	
+	// init return
+	$mylinks = array();
+	
+	switch ($objectName) {
+
+		case 'Contact':
+
+			switch ($op) {
+				
+				// place link in the menu that is accessible from the "Actions" button 
+				// at top left on a Contact's page
+				case 'view.contact.activity':
+					// Adds a link to the main tab.
+					$my_links[] = array(
+						'id' => 'mymoduleactions2',
+						'title' => 'My Module Actions 2',
+						'url' => '/'. $objectId,
+						'weight' => 2,
+						'ref'    => 'my-module-link-2' // this is unique identifier for this link
 					);
 					break;
 				
