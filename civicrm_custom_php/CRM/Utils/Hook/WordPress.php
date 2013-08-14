@@ -26,6 +26,13 @@
 */
 
 /**
+ * Not sure why this should differ from the above and I would prefer my code to
+ * be released under GPL v2+ but am deferring to http://civicrm.org/what/licensing
+ * Copyright (C) 2013 Christian Wach <needle@haystack.co.uk>
+ * Licensed to CiviCRM under the Academic Free License version 3.0.
+ */
+ 
+/**
  *
  * @package CRM
  * @copyright CiviCRM LLC (c) 2004-2013
