@@ -3,8 +3,8 @@ CiviCRM WordPress Hook Tests
 
 A simple plugin for testing CiviCRM hooks in WordPress. Its major advance over the current Drupal-centric hook system is that it allows multiple WordPress plugins to receive callbacks from CiviCRM hooks. To enable this, do **one** of the following:
 
-a. Replace `wp-content/plugins/civicrm/civicrm/CRM/Utils/Hook/WordPress.php` with the file `civicrm_custom_php/CRM/Utils/Hook/WordPress.php` bundled with this plugin. Bear in mind that the file will be overwritten every time you upgrade CiviCRM.
-b. The better option is to put the file `civicrm_custom_php/CRM/Utils/Hook/WordPress.php` bundled with this plugin in a path such as:
+* Replace `wp-content/plugins/civicrm/civicrm/CRM/Utils/Hook/WordPress.php` with the file `civicrm_custom_php/CRM/Utils/Hook/WordPress.php` bundled with this plugin. Bear in mind that the file will be overwritten every time you upgrade CiviCRM.
+* The better option is to put the file `civicrm_custom_php/CRM/Utils/Hook/WordPress.php` bundled with this plugin in a path such as:
 `/wp-content/plugins/files/civicrm/custom_php/CRM/Utils/Hook/WordPress.php`
 and then tell CiviCRM where to find its resources by going to 
 *Administer* --> *System Settings* --> *Directories*
