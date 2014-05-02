@@ -12,7 +12,7 @@ and fill that out appropriately.
 
 ### Notes for developers ###
 
-This is a copy of the noted in the main plugin file.
+This is a copy of the notes in the main plugin file.
 
 #### Callbacks with return values ####
 
