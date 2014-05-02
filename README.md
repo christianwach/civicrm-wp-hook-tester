@@ -16,9 +16,7 @@ This is a copy of the notes in the main plugin file.
 
 #### Callbacks with return values ####
 
-Because of the way CiviCRM hooks are constructed, the WordPress Plugin API cannot be used for any hooks that require a return value, because they are seemingly incompatible with apply_filters and apply_filters_ref_array.
-
-Luckily, there are very few of them at present. The full list is:
+Because of the way some CiviCRM hooks are constructed, the WordPress Plugin API cannot be used for any hooks that require a return value, because they are seemingly incompatible with `apply_filters` and `apply_filters_ref_array`. Luckily, there are very few of them at present. The full list is:
 
 * `civicrm_upgrade`
 * `civicrm_validate` (obsolete in CiviCRM 4.3)
@@ -37,13 +35,9 @@ This plugin uses the prefix `my_unique_plugin_code` and the callback function na
 
 `my_unique_plugin_code_civicrm_links`
 
-If a plugin needs to keep its logic inside a class, it will have to route the call to the class method from the global function. 
+If a plugin needs to keep its logic inside a class, it will have to route the call to the class method from the global function. If you want to set a priority for the callback, well, good luck. Yes, Drupal-style hooks in WordPress, oh joy.
 
-If you want to set a priority for the callback, well, good luck.
-
-Yes, Drupal-style hooks in WordPress, oh joy.
-
-#### Callbacks with return values ####
+#### Callbacks without return values ####
 
 However, if your plugin doesn't need to create callbacks for any of these hooks, you can simply use the WordPress Plugin API as per usual:
 
