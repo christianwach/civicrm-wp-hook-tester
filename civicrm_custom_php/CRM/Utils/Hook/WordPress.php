@@ -143,8 +143,12 @@ class CRM_Utils_Hook_WordPress extends CRM_Utils_Hook {
       Because $args are passed as references to the WordPress callbacks, 
       runHooks subsequently receives appropriately modified parameters.
       */
-      do_action_ref_array( $fnSuffix, $args );
-        
+      
+      // protect from REST calls
+      if (function_exists('do_action_ref_array')) {
+        do_action_ref_array( $fnSuffix, $args );
+      }
+      
     }
     
     
@@ -218,7 +222,11 @@ class CRM_Utils_Hook_WordPress extends CRM_Utils_Hook {
          * a plugin simply needs to declare its "unique_plugin_code" thus:
          * add_filter('civicrm_wp_plugin_codes', 'function_that_returns_my_unique_plugin_code');
          */
-        $this->wordpressModules = apply_filters('civicrm_wp_plugin_codes', $this->wordpressModules);
+        
+        // protect from REST
+        if (function_exists('apply_filters')) {
+          $this->wordpressModules = apply_filters('civicrm_wp_plugin_codes', $this->wordpressModules);
+        }
         
       }
 
