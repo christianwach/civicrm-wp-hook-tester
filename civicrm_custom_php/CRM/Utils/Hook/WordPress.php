@@ -68,7 +68,6 @@ class CRM_Utils_Hook_WordPress extends CRM_Utils_Hook {
     'civicrm_upgrade',
     'civicrm_caseSummary',
     'civicrm_dashboard',
-    'civicrm_alterSettingsMetaData'
   );
 
   /**
@@ -101,11 +100,6 @@ class CRM_Utils_Hook_WordPress extends CRM_Utils_Hook {
      * 
      * civicrm_dashboard
      * http://wiki.civicrm.org/confluence/display/CRMDOC43/hook_civicrm_dashboard
-     * 
-     * civicrm_alterSettingsMetaData
-     * civicrm_alterSettingsMetaData expects a return value, although there are no docs
-     * eg, line 595 of civicrm/CRM/Core/BAO/Setting.php
-     * http://wiki.civicrm.org/confluence/pages/viewpage.action?pageId=80806000
      */
     
     // distinguish between types of hook
