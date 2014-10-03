@@ -1,9 +1,9 @@
 <?php
 /*
  +--------------------------------------------------------------------+
- | CiviCRM version 4.3                                                |
+ | CiviCRM version 4.5                                                |
  +--------------------------------------------------------------------+
- | Copyright CiviCRM LLC (c) 2004-2013                                |
+ | Copyright CiviCRM LLC (c) 2004-2014                                |
  +--------------------------------------------------------------------+
  | This file is a part of CiviCRM.                                    |
  |                                                                    |
@@ -35,7 +35,7 @@
 /**
  *
  * @package CRM
- * @copyright CiviCRM LLC (c) 2004-2013
+ * @copyright CiviCRM LLC (c) 2004-2014
  * $Id$
  *
  */
@@ -86,7 +86,7 @@ class CRM_Utils_Hook_WordPress extends CRM_Utils_Hook {
 
   public function invoke(
     $numParams,
-    &$arg1, &$arg2, &$arg3, &$arg4, &$arg5,
+    &$arg1, &$arg2, &$arg3, &$arg4, &$arg5, &$arg6,
     $fnSuffix
   ) {
     
@@ -131,7 +131,7 @@ class CRM_Utils_Hook_WordPress extends CRM_Utils_Hook {
       
       // only pass the arguments that have values
       $args = array_slice( 
-        array( &$arg1, &$arg2, &$arg3, &$arg4, &$arg5 ), 
+        array( &$arg1, &$arg2, &$arg3, &$arg4, &$arg5, &$arg6 ), 
         0, 
         $numParams
       );
@@ -182,7 +182,7 @@ class CRM_Utils_Hook_WordPress extends CRM_Utils_Hook {
       $this->allModules, 
       $fnSuffix,
       $numParams, 
-      $arg1, $arg2, $arg3, $arg4, $arg5
+      $arg1, $arg2, $arg3, $arg4, $arg5, $arg6
     );
     
     //print_r( $moduleResult ): die();
