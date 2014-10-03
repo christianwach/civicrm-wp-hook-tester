@@ -66,7 +66,6 @@ class CRM_Utils_Hook_WordPress extends CRM_Utils_Hook {
    */
   private $hooksThatReturn = array(
     'civicrm_upgrade',
-    'civicrm_validate',
     'civicrm_caseSummary',
     'civicrm_dashboard',
     'civicrm_aclWhereClause',
@@ -97,11 +96,6 @@ class CRM_Utils_Hook_WordPress extends CRM_Utils_Hook {
      * 
      * civicrm_upgrade
      * http://wiki.civicrm.org/confluence/display/CRMDOC43/hook_civicrm_upgrade
-     * 
-     * civicrm_validate
-     * http://wiki.civicrm.org/confluence/pages/viewpage.action?pageId=79888748
-     * civicrm_validate is deprecated but still in use:
-     * eg, line 301 of civicrm/CRM/Core/Form.php
      * 
      * civicrm_caseSummary
      * http://wiki.civicrm.org/confluence/display/CRMDOC43/hook_civicrm_caseSummary
