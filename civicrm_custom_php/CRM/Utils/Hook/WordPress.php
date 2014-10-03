@@ -68,7 +68,6 @@ class CRM_Utils_Hook_WordPress extends CRM_Utils_Hook {
     'civicrm_upgrade',
     'civicrm_caseSummary',
     'civicrm_dashboard',
-    'civicrm_aclWhereClause',
     'civicrm_alterSettingsMetaData'
   );
 
@@ -102,9 +101,6 @@ class CRM_Utils_Hook_WordPress extends CRM_Utils_Hook {
      * 
      * civicrm_dashboard
      * http://wiki.civicrm.org/confluence/display/CRMDOC43/hook_civicrm_dashboard
-     * 
-     * civicrm_aclWhereClause
-     * http://wiki.civicrm.org/confluence/display/CRMDOC43/hook_civicrm_aclWhereClause
      * 
      * civicrm_alterSettingsMetaData
      * civicrm_alterSettingsMetaData expects a return value, although there are no docs
