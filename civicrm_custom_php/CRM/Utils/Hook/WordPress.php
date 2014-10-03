@@ -70,7 +70,6 @@ class CRM_Utils_Hook_WordPress extends CRM_Utils_Hook {
     'civicrm_validateForm',
     'civicrm_caseSummary',
     'civicrm_dashboard',
-    'civicrm_links',
     'civicrm_aclWhereClause',
     'civicrm_alterSettingsMetaData'
   );
@@ -113,9 +112,6 @@ class CRM_Utils_Hook_WordPress extends CRM_Utils_Hook {
      * 
      * civicrm_dashboard
      * http://wiki.civicrm.org/confluence/display/CRMDOC43/hook_civicrm_dashboard
-     * 
-     * civicrm_links
-     * http://wiki.civicrm.org/confluence/display/CRMDOC43/hook_civicrm_links
      * 
      * civicrm_aclWhereClause
      * http://wiki.civicrm.org/confluence/display/CRMDOC43/hook_civicrm_aclWhereClause
