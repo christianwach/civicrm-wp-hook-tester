@@ -21,13 +21,8 @@ This is a copy of the notes in the main plugin file.
 Because of the way some CiviCRM hooks are constructed, the WordPress Plugin API cannot be used for any hooks that require a return value, because they are seemingly incompatible with `apply_filters` and `apply_filters_ref_array`. Luckily, there are very few of them at present. The full list is:
 
 * `civicrm_upgrade`
-* `civicrm_validate` (obsolete in CiviCRM 4.3)
-* `civicrm_validateForm`
 * `civicrm_caseSummary`
 * `civicrm_dashboard`
-* `civicrm_links`
-* `civicrm_aclWhereClause`
-* `civicrm_alterSettingsMetaData`
 
 Any plugins that need to have callbacks for these hooks must register a unique code with CiviCRM. The code must be a valid part of a PHP function name, so stick to letters and underscores. This allows them to use global scope functions as callbacks in the form:
 

@@ -66,13 +66,8 @@ class CRM_Utils_Hook_WordPress extends CRM_Utils_Hook {
    */
   private $hooksThatReturn = array(
     'civicrm_upgrade',
-    'civicrm_validate',
-    'civicrm_validateForm',
     'civicrm_caseSummary',
     'civicrm_dashboard',
-    'civicrm_links',
-    'civicrm_aclWhereClause',
-    'civicrm_alterSettingsMetaData'
   );
 
   /**
@@ -100,30 +95,11 @@ class CRM_Utils_Hook_WordPress extends CRM_Utils_Hook {
      * civicrm_upgrade
      * http://wiki.civicrm.org/confluence/display/CRMDOC43/hook_civicrm_upgrade
      * 
-     * civicrm_validate
-     * http://wiki.civicrm.org/confluence/pages/viewpage.action?pageId=79888748
-     * civicrm_validate is deprecated but still in use:
-     * eg, line 301 of civicrm/CRM/Core/Form.php
-     * 
-     * civicrm_validateForm
-     * http://wiki.civicrm.org/confluence/display/CRMDOC43/hook_civicrm_validateForm
-     * 
      * civicrm_caseSummary
      * http://wiki.civicrm.org/confluence/display/CRMDOC43/hook_civicrm_caseSummary
      * 
      * civicrm_dashboard
      * http://wiki.civicrm.org/confluence/display/CRMDOC43/hook_civicrm_dashboard
-     * 
-     * civicrm_links
-     * http://wiki.civicrm.org/confluence/display/CRMDOC43/hook_civicrm_links
-     * 
-     * civicrm_aclWhereClause
-     * http://wiki.civicrm.org/confluence/display/CRMDOC43/hook_civicrm_aclWhereClause
-     * 
-     * civicrm_alterSettingsMetaData
-     * civicrm_alterSettingsMetaData expects a return value, although there are no docs
-     * eg, line 595 of civicrm/CRM/Core/BAO/Setting.php
-     * http://wiki.civicrm.org/confluence/pages/viewpage.action?pageId=80806000
      */
     
     // distinguish between types of hook
