@@ -10,6 +10,8 @@ and then tell CiviCRM where to find its resources by going to
 *Administer* --> *System Settings* --> *Directories*
 and fill that out appropriately.
 
+*Also note:* choose your copy of `WordPress.php` based on the version of CiviCRM that you are running. CiviCRM has added an extra parameter to hook callbacks in version 4.5, so if you're running version 4.5, switch to the 4.5 branch of this repo and use that version of `WordPress.php` instead.
+
 ### Notes for developers ###
 
 This is a copy of the notes in the main plugin file.
