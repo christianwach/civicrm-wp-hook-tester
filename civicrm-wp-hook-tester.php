@@ -27,13 +27,8 @@ incompatible with apply_filters and apply_filters_ref_array.
 Luckily, there are very few of them at present. The full list is:
 
 'civicrm_upgrade'
-'civicrm_validate' (obsolete in CiviCRM 4.3)
-'civicrm_validateForm'
 'civicrm_caseSummary'
 'civicrm_dashboard'
-'civicrm_links'
-'civicrm_aclWhereClause'
-'civicrm_alterSettingsMetaData'
 
 Any plugins that need to have callbacks for these hooks must register a unique code 
 with CiviCRM. The code must be a valid part of a PHP function name, so stick to
